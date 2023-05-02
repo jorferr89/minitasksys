@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+{% block title %} Gestión de Tareas - {{ title }} {% endblock %}
+{% block body %}
+
+<h1>{{ title }}</h1>
+
+<table id="tproyectos" class="table table-bordered table-hover border-dark">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha Lím.</th>
+            <th scope="col">Prioridad</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in object_list %}
+        <tr>
+            <td>{{ t.nombre }}</td> 
+            <td>{{ t.fecha_limite }}</td>
+            <td>{{ t.prioridad.nombre }} </td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></button>
+                <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tproyectos').DataTable();
+        } );
+    </script>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+{% endblock %}
