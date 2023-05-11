@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 class TareasListView(ListView):
     model = Tarea
-    template_name = 'list.html'
+    template_name = 'lista.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -18,8 +18,8 @@ class TareasListView(ListView):
 class TareaCreateView(CreateView):
     model = Tarea
     form_class = TareaForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('tareas:tareas_list')
+    template_name = 'crear.html'
+    success_url = reverse_lazy('tareas:tareas_lista')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
