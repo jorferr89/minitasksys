@@ -9,6 +9,15 @@ from django.urls import reverse_lazy
 class TareasListView(ListView):
     model = Tarea
     template_name = 'lista.html'
+    context_object_name = 'tareas'
+
+    def get_queryset(self):
+        # Obtén el usuario actual
+        usuario = self.request.user
+
+        # Filtra las tareas por el usuario actual
+        queryset = Tarea.objects.filter(usuario=usuario)
+        return queryset
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -18,11 +27,34 @@ class TareasListView(ListView):
 class TareaCreateView(CreateView):
     model = Tarea
     form_class = TareaForm
-    template_name = 'crear.html'
+    template_name = 'formulario.html'
     success_url = reverse_lazy('tareas:tareas_lista')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Crear Tarea'
         return context
+
+class TareaUpdateView(UpdateView):
+    model = Tarea
+    form_class = TareaForm
+    template_name = 'formulario.html'
+    success_url = reverse_lazy('tareas:tareas_lista')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Editar Tarea'
+        return context
+
+class TareaDeleteView(DeleteView):
+    model = Tarea
+    template_name = 'eliminar.html'
+    success_url = reverse_lazy('tareas:tareas_lista')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Eliminar Tarea'
+        return context
+
+
 
