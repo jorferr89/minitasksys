@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+{% block title %} Gestión de Tareas - {{ title }} {% endblock %}
+{% block body %}
+
+<div class="card">
+    <div class="card-header">
+      Mini-TaskSys
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+      <form method="post">
+        {% csrf_token %}
+        <h5>¿Marcar como Terminada?</h5>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success mt-2">Terminada</button>
+      </form>
+    </div>
+    </div>
+    
+{% endblock %}

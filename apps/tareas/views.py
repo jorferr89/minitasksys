@@ -56,5 +56,11 @@ class TareaDeleteView(DeleteView):
         context['title'] = 'Eliminar Tarea'
         return context
 
+class TareaTerminarView(UpdateView):
+    model = Tarea
+    fields = ['terminada']
+    template_name = 'terminar.html'
 
+    def get_success_url(self):
+        return reverse_lazy('tareas:tareas_lista')
 

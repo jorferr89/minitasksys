@@ -27,6 +27,7 @@
                 <td>
                     <button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></button>
                     <a href="{% url 'tareas:tareas_editar' t.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{% url 'tareas:tareas_terminar' t.id %}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="{% url 'tareas:tareas_eliminar' t.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
