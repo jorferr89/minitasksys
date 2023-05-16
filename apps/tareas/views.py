@@ -9,19 +9,12 @@ from django.urls import reverse_lazy
 class TareasListView(ListView):
     model = Tarea
     template_name = 'lista.html'
-    context_object_name = 'tareas'
-
-    def get_queryset(self):
-        # Obtén el usuario actual
-        usuario = self.request.user
-
-        # Filtra las tareas por el usuario actual
-        queryset = Tarea.objects.filter(usuario=usuario)
-        return queryset
     
     def get_context_data(self, **kwargs):
+        usuario = self.request.user
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Tareas'
+        context['object_list'] = Tarea.objects.filter(usuario=usuario)
         return context
 
 class TareaCreateView(CreateView):
