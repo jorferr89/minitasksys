@@ -21,8 +21,7 @@ class Prioridad(models.Model):
 class Tarea(models.Model):
     nombre = models.TextField(verbose_name='Nombre')
     descripcion = models.TextField(verbose_name='Descripcion')
-    #fecha_limite = models.DateField(verbose_name='Fecha Limite')
-    fecha_limite = models.DateField(auto_now_add=False, auto_now=False)
+    fecha_limite = models.DateField(default=datetime.now, verbose_name='Fecha Límite')
     terminada = models.BooleanField(default=False, verbose_name='Terminada')
     prioridad = models.ForeignKey(Prioridad, on_delete=models.CASCADE, verbose_name='Prioridad')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
