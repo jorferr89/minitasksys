@@ -38,6 +38,10 @@ class TareaUpdateView(UpdateView):
     template_name = 'formulario.html'
     success_url = reverse_lazy('tareas:tareas_lista')
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Editar Tarea'
