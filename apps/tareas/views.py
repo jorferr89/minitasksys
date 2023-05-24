@@ -3,6 +3,8 @@ from .models import *
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import *
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -32,11 +34,18 @@ class TareaCreateView(CreateView):
         context['title'] = 'Crear Tarea'
         return context
 
-class TareaUpdateView(UpdateView):
+class TareaUpdateView(UserPassesTestMixin, UpdateView):
     model = Tarea
     form_class = TareaForm
     template_name = 'formulario.html'
     success_url = reverse_lazy('tareas:tareas_lista')
+
+    def test_func(self):
+        tarea = self.get_object()
+        return tarea.usuario == self.request.user
+
+    def handle_no_permission(self):
+        return redirect('tareas:tareas_lista')
 
     def form_valid(self, form):
         form.instance.usuario = self.request.user
@@ -47,19 +56,34 @@ class TareaUpdateView(UpdateView):
         context['title'] = 'Editar Tarea'
         return context
 
-class TareaDeleteView(DeleteView):
+class TareaDeleteView(UserPassesTestMixin, DeleteView):
     model = Tarea
     template_name = 'eliminar.html'
     success_url = reverse_lazy('tareas:tareas_lista')
+
+    def test_func(self):
+        tarea = self.get_object()
+        return tarea.usuario == self.request.user
+
+    def handle_no_permission(self):
+        return redirect('tareas:tareas_lista')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Eliminar Tarea'
         return context
 
-class TareaTerminarView(UpdateView):
+class TareaTerminarView(UserPassesTestMixin, UpdateView):
     model = Tarea
     template_name = 'terminar.html'
     fields = ['terminada']
     success_url = reverse_lazy('tareas:tareas_lista')
+
+    def test_func(self):
+        tarea = self.get_object()
+        return tarea.usuario == self.request.user
+
+    def handle_no_permission(self):
+        return redirect('tareas:tareas_lista')
+
 
