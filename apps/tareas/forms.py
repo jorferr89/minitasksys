@@ -7,14 +7,14 @@ from .models import *
 class TareaForm(ModelForm):
     class Meta:
         model = Tarea
-        fields = ['nombre', 'descripcion', 'fecha_limite', 'prioridad', 'usuario']
+        fields = ['nombre', 'descripcion', 'fecha_limite', 'prioridad']
+        exclude = ['usuario']
 
         labels = {
             'nombre': 'Nombre',
             'descripcion': 'Descripción',
             'fecha_limite': 'Fecha Límite',
-            'prioridad': 'Prioridad',
-            'usuario': 'Usuario'
+            'prioridad': 'Prioridad'
         }
         widgets = {
             'nombre': TextInput(
@@ -37,12 +37,6 @@ class TareaForm(ModelForm):
             ),
 
             'prioridad': Select(
-                attrs={
-                    'class': 'custom-select',
-                }
-            ),
-
-            'usuario': Select(
                 attrs={
                     'class': 'custom-select',
                 }
