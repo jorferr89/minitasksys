@@ -51,9 +51,7 @@ class TareaDeleteView(DeleteView):
 
 class TareaTerminarView(UpdateView):
     model = Tarea
-    fields = ['terminada']
     template_name = 'terminar.html'
-
-    def get_success_url(self):
-        return reverse_lazy('tareas:tareas_lista')
+    fields = ['terminada']
+    success_url = reverse_lazy('tareas:tareas_lista')
 
