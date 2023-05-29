@@ -14,6 +14,7 @@
             <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha Lím.</th>
+                <th scope="col">Terminada?</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Acciones</th>
             </tr>
@@ -23,6 +24,10 @@
             <tr>
                 <td>{{ t.nombre }}</td> 
                 <td>{{ t.fecha_limite }}</td>
+                <td>    {% if t.terminada == True %} <span class="badge bg-success">SI</span>
+                        {% else %} <span class="badge bg-danger">NO</span>
+                        {% endif %}
+                </td>
                 <td>{{ t.prioridad.nombre }} </td>
                 <td>
                     <a href="{% url 'tareas:tareas_terminar' t.id %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>

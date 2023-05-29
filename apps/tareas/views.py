@@ -10,20 +10,23 @@ from django.shortcuts import redirect
 
 class TareasListView(ListView):
     model = Tarea
-    template_name = 'lista.html'
+    template_name = 'listar.html'
+    ordering = ['terminada', 'fecha_limite']
+    #ordering = ['-nombre']
     
     def get_context_data(self, **kwargs):
         usuario = self.request.user
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Tareas'
         context['object_list'] = Tarea.objects.filter(usuario=usuario)
+        #context['object_list'] = Tarea.objects.order_by('fecha_limite')
         return context
 
 class TareaCreateView(CreateView):
     model = Tarea
     form_class = TareaForm
     template_name = 'formulario.html'
-    success_url = reverse_lazy('tareas:tareas_lista')
+    success_url = reverse_lazy('tareas:tareas_listar')
 
     def form_valid(self, form):
         form.instance.usuario = self.request.user
@@ -38,14 +41,14 @@ class TareaUpdateView(UserPassesTestMixin, UpdateView):
     model = Tarea
     form_class = TareaForm
     template_name = 'formulario.html'
-    success_url = reverse_lazy('tareas:tareas_lista')
+    success_url = reverse_lazy('tareas:tareas_listar')
 
     def test_func(self):
         tarea = self.get_object()
         return tarea.usuario == self.request.user
 
     def handle_no_permission(self):
-        return redirect('tareas:tareas_lista')
+        return redirect('tareas:tareas_listar')
 
     def form_valid(self, form):
         form.instance.usuario = self.request.user
@@ -59,14 +62,14 @@ class TareaUpdateView(UserPassesTestMixin, UpdateView):
 class TareaDeleteView(UserPassesTestMixin, DeleteView):
     model = Tarea
     template_name = 'eliminar.html'
-    success_url = reverse_lazy('tareas:tareas_lista')
+    success_url = reverse_lazy('tareas:tareas_listar')
 
     def test_func(self):
         tarea = self.get_object()
         return tarea.usuario == self.request.user
 
     def handle_no_permission(self):
-        return redirect('tareas:tareas_lista')
+        return redirect('tareas:tareas_listar')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -77,13 +80,13 @@ class TareaTerminarView(UserPassesTestMixin, UpdateView):
     model = Tarea
     template_name = 'terminar.html'
     fields = ['terminada']
-    success_url = reverse_lazy('tareas:tareas_lista')
+    success_url = reverse_lazy('tareas:tareas_listar')
 
     def test_func(self):
         tarea = self.get_object()
         return tarea.usuario == self.request.user
 
     def handle_no_permission(self):
-        return redirect('tareas:tareas_lista')
+        return redirect('tareas:tareas_listar')
 
 
