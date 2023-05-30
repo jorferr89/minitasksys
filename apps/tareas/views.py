@@ -11,15 +11,13 @@ from django.shortcuts import redirect
 class TareasListView(ListView):
     model = Tarea
     template_name = 'listar.html'
-    ordering = ['terminada', 'fecha_limite']
-    #ordering = ['-nombre']
+    ordering = ['-fecha_limite']
     
     def get_context_data(self, **kwargs):
         usuario = self.request.user
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Tareas'
         context['object_list'] = Tarea.objects.filter(usuario=usuario)
-        #context['object_list'] = Tarea.objects.order_by('fecha_limite')
         return context
 
 class TareaCreateView(CreateView):

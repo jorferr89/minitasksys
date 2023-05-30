@@ -13,7 +13,7 @@
         <h5>Detalle de la Tarea</h5>
         <ul class="list-group">
           <li class="list-group-item">Nombre: {{ tarea.nombre }}</li>
-          <li class="list-group-item">Fecha Límite: {{ tarea.fecha_limite }}</li>
+          <li class="list-group-item">Fecha Límite: {{ tarea.fecha_limite|date:'d/m/Y' }}</li>
           <li class="list-group-item">Prioridad: {{ tarea.prioridad.nombre }}</li>
           <li class="list-group-item">{{ form.as_p }}</li>
         </ul>
