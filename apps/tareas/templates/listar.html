@@ -52,7 +52,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#tproyectos').DataTable();
+            $('#tproyectos').DataTable( {
+                "order": [[ 2, 'asc' ], [ 1, 'desc' ]]
+            } );
         } );
     </script>
 {% endblock %}
