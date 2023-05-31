@@ -34,6 +34,6 @@ class Tarea(models.Model):
         verbose_name = 'Tarea'
         verbose_name_plural = 'Tareas'
         db_table = 'tareas'
-        ordering = ['-fecha_limite']
+        ordering = ['terminada', '-fecha_limite']
 
 
