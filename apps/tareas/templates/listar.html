@@ -23,7 +23,7 @@
             {% for t in object_list %}
             <tr>
                 <td>{{ t.nombre }}</td> 
-                <td>{{ t.fecha_limite|date:'d/m/Y' }}</td>
+                <td data-sort='YYYYMMDD'> {{ t.fecha_limite|date:'d/m/Y' }} </td>
                 <td>    {% if t.terminada == True %} <span class="badge bg-success">SI</span>
                         {% else %} <span class="badge bg-danger">NO</span>
                         {% endif %}
