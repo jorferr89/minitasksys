@@ -8,6 +8,11 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">Mis Tareas</h5>
+      <form method="GET">
+        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+        <button type="submit">Filter</button>
+      </form>
       
       <table id="tproyectos" class="table table-bordered table-hover border-dark">
         <thead class="thead-dark">

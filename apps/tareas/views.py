@@ -5,6 +5,7 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -12,12 +13,28 @@ class TareasListView(ListView):
     model = Tarea
     template_name = 'listar.html'
     ordering = ['terminada', '-fecha_limite']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+        
+        if start_date and end_date:
+            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+            end_date += timedelta(days=1)
+            
+            #queryset = queryset.filter(fecha_limite__range=(start_date, end_date))
+            queryset = queryset.filter(fecha_limite__range=(start_date, end_date), usuario=user)
+        
+        return queryset
     
     def get_context_data(self, **kwargs):
-        usuario = self.request.user
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Tareas'
-        context['object_list'] = Tarea.objects.filter(usuario=usuario)
+        context['start_date'] = self.request.GET.get('start_date')
+        context['end_date'] = self.request.GET.get('end_date')
         return context
 
 class TareaCreateView(CreateView):
