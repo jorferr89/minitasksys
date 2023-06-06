@@ -94,7 +94,7 @@ class TareaDeleteView(UserPassesTestMixin, DeleteView):
 class TareaTerminarView(UserPassesTestMixin, UpdateView):
     model = Tarea
     template_name = 'terminar.html'
-    fields = ['terminada']
+    fields = []
     success_url = reverse_lazy('tareas:tareas_listar')
 
     def test_func(self):
@@ -103,5 +103,11 @@ class TareaTerminarView(UserPassesTestMixin, UpdateView):
 
     def handle_no_permission(self):
         return redirect('tareas:tareas_listar')
+
+    def form_valid(self, form):
+        tarea = form.save(commit=False)
+        tarea.terminada = True
+        tarea.save()
+        return super().form_valid(form)
 
 
