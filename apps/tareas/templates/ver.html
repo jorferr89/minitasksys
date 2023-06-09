@@ -15,8 +15,14 @@
           <li class="list-group-item">Nombre: {{ tarea.nombre }}</li>
           <li class="list-group-item">Fecha Límite: {{ tarea.fecha_limite|date:'d/m/Y' }}</li>
           <li class="list-group-item">Prioridad: {{ tarea.prioridad.nombre }}</li>
+          <li class="list-group-item">Terminada: {% if tarea.terminada == True %} <span class="badge bg-success">SI</span>
+                        {% else %} <span class="badge bg-danger">NO</span>
+                        {% endif %}
+          </li>
         </ul>
+        {% if tarea.terminada != True %}
         <button type="submit" class="btn btn-success mt-2">Terminar</button>
+        {% endif %}
       </form>
     </div>
     </div>

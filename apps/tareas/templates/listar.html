@@ -35,7 +35,7 @@
                 </td>
                 <td>{{ t.prioridad.nombre }} </td>
                 <td>
-                    <a href="{% url 'tareas:tareas_terminar' t.id %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{% url 'tareas:tareas_ver' t.id %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                     <a href="{% url 'tareas:tareas_editar' t.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="{% url 'tareas:tareas_eliminar' t.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                 </td>

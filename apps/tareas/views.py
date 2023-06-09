@@ -93,7 +93,7 @@ class TareaDeleteView(UserPassesTestMixin, DeleteView):
 
 class TareaTerminarView(UserPassesTestMixin, UpdateView):
     model = Tarea
-    template_name = 'terminar.html'
+    template_name = 'ver.html'
     fields = []
     success_url = reverse_lazy('tareas:tareas_listar')
 
