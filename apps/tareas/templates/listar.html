@@ -61,14 +61,59 @@
 {% endblock %}
 
 {% block js %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $('#start_date').change(function() {
+            var fecha_desde = $(this).val();
+            $('#end_date').attr({"min" : start_date});;
+
+        });
+        
+        $('#end_date').change(function() {
+            var end_date = $(this).val();
+            $('#start_date').attr({"max" : end_date});;
+        });
+
+    });
+    </script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#tproyectos').DataTable( {
-                "order": [[ 2, 'asc' ], [ 1, 'desc' ]]
+                "order": [[ 2, 'asc' ], [ 1, 'desc' ]],
+                "aaSorting": [],
+                "pageLength" : 5,
+                "lengthMenu": [[5, 10], [5, 10]],
+                language: {
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+
+                    }
+                } );
             } );
-        } );
     </script>
 {% endblock %}
 
