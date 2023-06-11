@@ -1,20 +1,16 @@
 {% extends "base/base.html" %}
-{% block title %} Gestión de Tareas - {{ title }} {% endblock %}
-{% block body %}
+{% block content-title %} Gestión de Tareas - {{ title }} {% endblock %}
 
-<div class="card">
-    <div class="card-header">
-      Mini-TaskSys
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Mis Tareas</h5>
-      <form method="GET">
+
+{% block content %}
+    <form method="GET">
         <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
         <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
         <button type="submit">Filter</button>
-      </form>
-      
-      <table id="tproyectos" class="table table-bordered table-hover border-dark">
+    </form>
+
+
+    <table id="tproyectos" class="table table-bordered table-hover border-dark">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Nombre</th>
@@ -43,13 +39,9 @@
             {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-success" href="{% url 'tareas:tareas_crear' %}" role="button">Nueva Tarea</a>
-    </div>
 
-</div>
+    <a href="{% url 'tareas:tareas_crear' %}" class="btn btn-primary">Nueva Tarea</a>
 
-
-    
 {% endblock %}
 
 {% block js %}

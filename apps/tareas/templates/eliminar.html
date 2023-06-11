@@ -1,20 +1,14 @@
 {% extends "base/base.html" %}
-{% block title %} Gestión de Tareas - {{ title }} {% endblock %}
-{% block body %}
+{% block content-title %} Gestión de Tareas - {{ title }} {% endblock %}
 
-<div class="card">
-    <div class="card-header">
-      Mini-TaskSys
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
-      <form method="post">
+{% block content %}
+    <form method="post">
         {% csrf_token %}
-        <h5>¿Seguro Eliminar?</h5>
-        <button type="submit" class="btn btn-danger mt-2">Eliminar</button>
-    </form>
+        <h2>Seguro Eliminar?</h2>
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a href="{% url 'tareas:tareas_listar' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
 
-    </div>
-    </div>
-    
+    </form>
 {% endblock %}

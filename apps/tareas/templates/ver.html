@@ -1,16 +1,10 @@
 {% extends "base/base.html" %}
-{% block title %} Gestión de Tareas - {{ title }} {% endblock %}
-{% block body %}
+{% block content-title %} Gestión de Tareas - {{ title }} {% endblock %}
 
-<div class="card">
-    <div class="card-header">
-      Mini-TaskSys
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
-      <form method="post">
+{% block content %}
+    <form method="post">
         {% csrf_token %}
-        <h5>Detalle de la Tarea</h5>
+        <h2>Detalles de la Tarea</h2>
         <ul class="list-group">
           <li class="list-group-item">Nombre: {{ tarea.nombre }}</li>
           <li class="list-group-item">Fecha Límite: {{ tarea.fecha_limite|date:'d/m/Y' }}</li>
@@ -20,11 +14,12 @@
                         {% endif %}
           </li>
         </ul>
-        {% if tarea.terminada != True %}
-        <button type="submit" class="btn btn-success mt-2">Terminar</button>
-        {% endif %}
-      </form>
-    </div>
-    </div>
-    
+        <div class="text-center my-2">
+            {% if tarea.terminada != True %}
+                <button type="submit" class="btn btn-success">Terminar</button>
+            {% endif %}
+            <a href="{% url 'tareas:tareas_listar' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+
+    </form>
 {% endblock %}
