@@ -3,10 +3,26 @@
 
 
 {% block content %}
-    <form method="GET">
-        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
-        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
-        <button type="submit">Filter</button>
+
+    <form class="bg-light" method="GET">
+        <div class="form-row align-items-center mx-2 my-2">
+            <div class="col-sm-2 text-left font-weight-bold">
+                Fecha Desde
+            </div>
+            <div class="col-sm-3 my-1">
+                <input type="date" class="form-control" type="date" name="start_date" id="start_date" value="{{ start_date }}">
+            </div>
+            <div class="col-sm-2 text-left font-weight-bold">
+                Fecha Hasta
+            </div>
+            <div class="col-sm-3 my-1">
+                <input type="date" class="form-control" type="date" name="end_date" id="end_date" value="{{ end_date }}">
+            </div>
+            
+            <div class="col-sm-2 text-center">
+                <button type="submit" class="btn btn-outline-primary my-1">Filtrar</button>
+            </div>
+        </div>
     </form>
 
 
