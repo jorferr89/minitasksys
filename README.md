@@ -13,7 +13,7 @@ $ source env/bin/activate
 (env) $ pip install -r requirements.txt
 ```
 
-3. Migrar la base de datos
+3. Migrar la base de datos.
 ```
 (env) $ python manage.py migrate
 ```
