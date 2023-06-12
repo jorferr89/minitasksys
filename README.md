@@ -13,8 +13,9 @@ $ source env/bin/activate
 (env) $ pip install -r requirements.txt
 ```
 
-3. Migrar la base de datos.
+3. Crear las migraciones y ejecutarlas.
 ```
+(env) $ python manage.py makemigrations
 (env) $ python manage.py migrate
 ```
 
@@ -32,4 +33,5 @@ $ source env/bin/activate
 
 Ingresar desde: http://127.0.0.1:8000/
 
+NOTA: La aplicación no tiene el CRUD de Prioridad, debe agregarlas desde el admin.
 Usuario administrador http://127.0.0.1:8000/admin/
