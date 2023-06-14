@@ -21,13 +21,15 @@ class TareasListView(ListView):
         start_date = self.request.GET.get('start_date')
         end_date = self.request.GET.get('end_date')
         
-        if start_date and end_date:
+        if start_date:
             start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+            queryset = queryset.filter(fecha_limite__gte=start_date)
+        
+        if end_date:
             end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
-            end_date += timedelta(days=1)
-            
-            #queryset = queryset.filter(fecha_limite__range=(start_date, end_date))
-            queryset = queryset.filter(fecha_limite__range=(start_date, end_date), usuario=user)
+            queryset = queryset.filter(fecha_limite__lte=end_date)
+        
+        queryset = queryset.filter(usuario=user)
         
         return queryset
     
