@@ -25,6 +25,7 @@ class TareaForm(ModelForm):
             },
             'prioridad': {
                 'required': 'El campo Prioridad es requerido.',
+                'invalid_choice': 'Seleccionar una opción válida.'
             },
         }
 
