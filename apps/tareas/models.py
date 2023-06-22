@@ -6,7 +6,7 @@ from django.core.validators import RegexValidator
 
 # Create your models here.
 
-alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Se aceptan solamente valores alfanuméricos.')
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z ,.;¿?¡!]*$', 'Se aceptan solamente valores alfanuméricos con coma (,) y punto (.).')
 
 # Prioridades
 class Prioridad(models.Model):
